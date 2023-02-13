@@ -17,9 +17,14 @@
   },
   "homepage": "https://github.com/ezanapay1/V2backend#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0",
     "postgres": "^3.3.3",
     "sequelize": "^6.28.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.1"
   }
 }
