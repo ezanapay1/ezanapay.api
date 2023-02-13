@@ -1,18 +1,18 @@
-const Sequlize = require("sequalize")
+const Sequlize = require("sequelize")
 
-const sequlize = new Sequlize(
-    process.env.PG_NAME,
+const sequelize = new Sequlize(
+    process.env.PG_DB,
     process.env.PG_USER,
-    process.env.PG_PASS,
+    process.env.PG_PASSWORD,
     {
         host: process.env.PG_HOST,
         dialect: "postgres",
-        port: process.env.PG_PORT,
-        logging: false,
-        define: {
-            timestamps: false
-        }
+        // port: process.env.PG_PORT,
+        // logging: false,
+        // define: {
+        //     timestamps: false
+        // }
     }
 )
 
-module.exports = sequlize
+module.exports = sequelize

@@ -1,4 +1,4 @@
-const Sequlize = require("sequalize")
+const Sequlize = require("sequelize")
 const db = require("../utils/database")
 
 const User = db.define("user", {

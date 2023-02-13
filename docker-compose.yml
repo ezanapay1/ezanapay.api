@@ -1,8 +1,33 @@
-version: '3.4'
+version: '3.9'
 
 services:
-  v2backend:
-    image: v2backend
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+  ezanapay-api:
+    container_name: ezanapay-api
+    build: .
+    image: mogakadev20/ezanapay-api
+    ports:
+      - "3000:3000"
+    environment:
+      - PG_DB=ezanapay_db
+      - PG_USER=ezanapay
+      - PG_PASSWORD=12345
+      - PG_HOST=ezanapay_db
+    depends_on:
+      - ezanapay_db
+    restart: always
+
+  ezanapay_db:
+    container_name: ezanapay_db
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=ezanapay_db
+      - POSTGRES_USER=ezanapay
+      - POSTGRES_PASSWORD=12345
+    volumes:
+      - ezanapay_db_data:/var/lib/postgresql/data
+
+volumes: 
+  ezanapay_db_data: {}
+    

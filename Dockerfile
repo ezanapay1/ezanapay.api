@@ -1,4 +1,16 @@
-FROM docker/whalesay:latest
-LABEL Name=v2backend Version=0.0.1
-RUN apt-get -y update && apt-get install -y fortunes
-CMD ["sh", "-c", "/usr/games/fortune -a | cowsay"]
+FROM node:18-alpine
+
+# Create app directory
+WORKDIR /app
+
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "node", "index.js" ]
