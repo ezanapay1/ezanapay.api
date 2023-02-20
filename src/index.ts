@@ -6,6 +6,8 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import connect from "./api/utils/prisma";
+import log from "./api/utils/logger";
 
 dotenv.config();
 
@@ -34,5 +36,8 @@ app.use(express.json());
  */
 
 app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+    log.info(`🚀  API is listening on port ${PORT}`);
+    connect()
 });
+
+export default app;
