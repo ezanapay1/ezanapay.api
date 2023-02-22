@@ -1,14 +1,15 @@
 import { PrismaClient } from "@prisma/client";
-
 import config from "config";
 import log from "./logger";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
-async function connect() {
+export async function connect() {
+    const _prisma = new PrismaClient();
+
     const DB_URL = config.get("dbURL");
     try {
-        await prisma.$connect();
+        await _prisma.$connect();
         log.info(`🚀  Connected to database at ${DB_URL}`);
     } catch (e) {
         console.error(e);
@@ -16,4 +17,3 @@ async function connect() {
     }
 }
 
-export default connect
