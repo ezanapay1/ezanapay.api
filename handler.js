@@ -1,7 +1,6 @@
 'use strict';
 
+import app from './src/index.ts';
+import serverless from 'serverless-http';
 
-const app = require('./src/index.ts');
-const serverless = require('serverless-http');
-
-module.exports.hello = serverless(app);
+export const hello = serverless(app);
