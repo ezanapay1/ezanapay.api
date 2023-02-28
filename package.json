@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is the backend api that will be used to handle the apps functionality",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/index.ts",
     "test": "npm run jest",
