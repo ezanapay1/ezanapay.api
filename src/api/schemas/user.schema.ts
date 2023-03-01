@@ -1,4 +1,4 @@
-import {object, string, TypeOf} from "zod"
+import { object, string, TypeOf } from "zod"
 
 export const createUserSchema = object({
     body: object({
@@ -16,9 +16,6 @@ export const createUserSchema = object({
         }).min(6, "Password is too short - should be min of 6 characters"),
         confirmPassword: string({
             required_error: "Password confirmation is required"
-        }).refine((data) => data.password === data.confirmPassword, {
-            message: "Passwords do not match!",
-            path: ["confirmPassword"]
         }),
     })
 })

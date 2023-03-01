@@ -6,6 +6,6 @@ export interface User {
     email: string;
     password: string;
     verificationCode: string;
-    passwordResetCode: string | null;
+    resetPasswordCode: string;
     verified: boolean
 }
