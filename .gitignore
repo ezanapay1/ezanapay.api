@@ -1,11 +1,9 @@
-# package directories
-node_modules
-jspm_packages
+**/node_modules
+dist/
+**/**/*.log
 
-# Serverless directories
-.serverless
-
-.env
-
-private.pem
-public.pem
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
