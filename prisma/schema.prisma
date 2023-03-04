@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,20 +8,35 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(cuid())
-  email     String  @unique
-  password  String
-  firstName String?
-  lastName  String?
-  salt      String
-  role      Role    @default(Tenant)
-
+  id         String     @id @default(cuid())
+  email      String     @unique
+  password   String
+  firstName  String?
+  lastName   String?
+  salt       String
+  role       Role       @default(Tenant)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   properties Property[]
 
-  @@index([email], name: "email")
+  @@index([email], map: "email")
   @@map("users")
+}
+
+model Property {
+  id          String   @id @default(cuid())
+  name        String
+  address     String
+  city        String
+  state       String
+  zip         String
+  description String
+  ownerId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  owner       User     @relation(fields: [ownerId], references: [id])
+
+  @@map("properties")
 }
 
 enum Role {
@@ -32,23 +44,4 @@ enum Role {
   Tenant
   PropertyManager
   admin
-}
-
-model Property {
-  id          String @id @default(cuid())
-  name        String
-  address     String
-  city        String
-  state       String
-  zip         String
-  description String
-  owner       User   @relation(fields: [ownerId], references: [id])
-  ownerId     String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-
-  @@map("properties")
-
 }
