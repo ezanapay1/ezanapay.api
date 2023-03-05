@@ -1,0 +1,12 @@
+service: ezanapay-api
+
+provider: 
+  name: aws
+  runtime: nodejs18.x
+
+
+functions:
+  app:
+    handler: index.handler
+    name: ezanapay-api
+    
