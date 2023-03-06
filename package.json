@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npm i typescript && tsc",
     "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts"
   },
   "keywords": [],
