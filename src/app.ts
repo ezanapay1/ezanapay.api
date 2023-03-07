@@ -31,12 +31,6 @@ server.get("/healthcheck", async (request, reply) => {
   return { status: "ok" };
 });
 
-server.get("/", async () => {
-  return {
-    message: "Welcome to Ezanapay API",
-  };
-});
-
 async function main() {
   for (const schema of userSchemas) {
     server.addSchema(schema);
@@ -45,7 +39,7 @@ async function main() {
   server.register(userRoutes, { prefix: "api/user" });
 
   try {
-    await server.listen(process.env.PORT || 3000);
+    await server.listen(3000, "0.0.0.0");
 
     console.log(`Server listening on http://localhost:3000`);
   } catch (e) {
