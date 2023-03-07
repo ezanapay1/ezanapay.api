@@ -4,10 +4,20 @@ import userRoutes from "./modules/user/user.route";
 import { userSchemas } from "./modules/user/user.schema";
 import fjwt from "@fastify/jwt";
 
+import cors from "@fastify/cors"
+
 export const server = Fastify();
 
 server.register(fjwt, {
   secret: "supersecret",
+});
+
+server.register(cors, {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 });
 
 declare module "fastify" {
@@ -39,7 +49,7 @@ async function main() {
   server.register(userRoutes, { prefix: "api/user" });
 
   try {
-    await server.listen(3000, "0.0.0.0");
+    await server.listen({ port: 3000 });
 
     console.log(`Server listening on http://localhost:3000`);
   } catch (e) {
