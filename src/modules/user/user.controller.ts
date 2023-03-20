@@ -49,9 +49,8 @@ export async function loginHandler(
     const { password, salt, ...rest } = user;
 
     // generate access token
-    return { accessToken: server.jwt.sign(rest) };
+    return { accessToken: server.jwt.sign(rest), user };
   }
-
   // response
   return reply.code(401).send({
     message: "Invalid email or password!",
