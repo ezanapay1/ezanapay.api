@@ -4,12 +4,34 @@ import userRoutes from "./modules/user/user.route";
 import { userSchemas } from "./modules/user/user.schema";
 import fjwt from "@fastify/jwt";
 
-import cors from "@fastify/cors"
+import cors from "@fastify/cors";
+
+import { ServerlessAdapter } from "@h4ad/serverless-adapter";
+import { FastifyFramework } from "@h4ad/serverless-adapter/lib/frameworks/fastify";
+import { DefaultHandler } from "@h4ad/serverless-adapter/lib/handlers/default";
+import { PromiseResolver } from "@h4ad/serverless-adapter/lib/resolvers/promise";
+import { ApiGatewayV2Adapter } from "@h4ad/serverless-adapter/lib/adapters/aws";
 
 export const server = Fastify();
 
+export const handler = ServerlessAdapter.new(server)
+  .setFramework(new FastifyFramework())
+  .setHandler(new DefaultHandler())
+  .setResolver(new PromiseResolver())
+  .addAdapter(new ApiGatewayV2Adapter())
+  .build();
+
 server.register(fjwt, {
   secret: "supersecret",
+});
+
+const fastify = require("fastify")({
+  logger: {
+    transport: {
+      target: "pino-pretty",
+    },
+    level: "info",
+  },
 });
 
 server.register(cors, {
@@ -51,7 +73,7 @@ async function main() {
   try {
     await server.listen({ port: 3000 });
 
-    console.log(`Server listening on http://localhost:3000`);
+    fastify.log.info(`Server listening on http://localhost:3000`);
   } catch (e) {
     console.log(e);
     process.exit(1);
