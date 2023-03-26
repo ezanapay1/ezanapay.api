@@ -15,6 +15,8 @@ const default_1 = require("@h4ad/serverless-adapter/lib/handlers/default");
 const promise_1 = require("@h4ad/serverless-adapter/lib/resolvers/promise");
 const aws_1 = require("@h4ad/serverless-adapter/lib/adapters/aws");
 exports.server = (0, fastify_1.default)();
+const PORT = process.env.PORT;
+require('dotenv').config();
 exports.handler = serverless_adapter_1.ServerlessAdapter.new(exports.server)
     .setFramework(new fastify_2.FastifyFramework())
     .setHandler(new default_1.DefaultHandler())
@@ -56,8 +58,10 @@ async function main() {
     }
     exports.server.register(user_route_1.default, { prefix: "api/user" });
     try {
-        await exports.server.listen({ port: 3000 });
-        console.log(`Server listening on http://localhost:3000`);
+        await exports.server.listen({
+            port: PORT,
+        });
+        console.log(`Server listening on http://localhost:${PORT}`);
     }
     catch (e) {
         console.log(e);

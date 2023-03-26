@@ -14,6 +14,10 @@ import { ApiGatewayV2Adapter } from "@h4ad/serverless-adapter/lib/adapters/aws";
 
 export const server = Fastify();
 
+const PORT = process.env.PORT;
+
+require('dotenv').config();
+
 export const handler = ServerlessAdapter.new(server)
   .setFramework(new FastifyFramework())
   .setHandler(new DefaultHandler())
@@ -71,9 +75,11 @@ async function main() {
   server.register(userRoutes, { prefix: "api/user" });
 
   try {
-    await server.listen({ port: 3000 });
+    await server.listen({ 
+      port: PORT,
+     });
 
-    console.log(`Server listening on http://localhost:3000`);
+    console.log(`Server listening on http://localhost:${PORT}`);
   } catch (e) {
     console.log(e);
     process.exit(1);
