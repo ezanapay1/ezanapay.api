@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm i && npx prisma generate",
+    "build": "npm i && npx prisma generate && npm i -g pino-pretty",
     "deploy": "claudia create --version dev --region us-east-1 --api-module ezanapay-api",
     "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts",
-    "start": "node src/app.js"
+    "start": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
