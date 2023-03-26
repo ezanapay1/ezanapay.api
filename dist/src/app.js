@@ -24,14 +24,14 @@ exports.handler = serverless_adapter_1.ServerlessAdapter.new(exports.server)
 exports.server.register(jwt_1.default, {
     secret: "supersecret",
 });
-const fastify = require("fastify")({
-    logger: {
-        transport: {
-            target: "pino-pretty",
-        },
-        level: "info",
-    },
-});
+// const fastify = require("fastify")({
+//   logger: {
+//     transport: {
+//       target: "pino-pretty",
+//     },
+//     level: "info",
+//   },
+// });
 exports.server.register(cors_1.default, {
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
@@ -57,7 +57,7 @@ async function main() {
     exports.server.register(user_route_1.default, { prefix: "api/user" });
     try {
         await exports.server.listen({ port: 3000 });
-        fastify.log.info(`Server listening on http://localhost:3000`);
+        console.log(`Server listening on http://localhost:3000`);
     }
     catch (e) {
         console.log(e);

@@ -25,14 +25,14 @@ server.register(fjwt, {
   secret: "supersecret",
 });
 
-const fastify = require("fastify")({
-  logger: {
-    transport: {
-      target: "pino-pretty",
-    },
-    level: "info",
-  },
-});
+// const fastify = require("fastify")({
+//   logger: {
+//     transport: {
+//       target: "pino-pretty",
+//     },
+//     level: "info",
+//   },
+// });
 
 server.register(cors, {
   origin: "*",
@@ -73,7 +73,7 @@ async function main() {
   try {
     await server.listen({ port: 3000 });
 
-    fastify.log.info(`Server listening on http://localhost:3000`);
+    console.log(`Server listening on http://localhost:3000`);
   } catch (e) {
     console.log(e);
     process.exit(1);
