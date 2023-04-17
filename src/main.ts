@@ -1,16 +1,22 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const config = new DocumentBuilder();
-  config.setTitle('EzanaPay API');
-  config.setDescription('EzanaPay API description');
-  config.setVersion('1.0');
-  config.addTag('ezanapay');
-  config.addBearerAuth();
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  const config = new DocumentBuilder()
+    .setTitle('EzanaPay API')
+    .setDescription(
+      'This is the official backend API for the EzanaPay project.',
+    )
+    .setVersion('0.0.1')
+    .addTag('ezanapay')
+    .addBearerAuth();
 
   const document = SwaggerModule.createDocument(app, config.build());
   SwaggerModule.setup('api', app, document);
