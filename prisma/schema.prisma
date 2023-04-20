@@ -19,11 +19,32 @@ model User {
   properties Property[]
 
   emailVerified Boolean @default(false)
+  tokens        Token[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("users")
+}
+
+model Token {
+  id         Int       @id @default(autoincrement())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  type       TokenType
+  emailToken String?   @unique
+  valid      Boolean   @default(true)
+  expiration DateTime
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  @@map("tokens")
+}
+
+enum TokenType {
+  EMAIL
+  API
 }
 
 enum Role {
