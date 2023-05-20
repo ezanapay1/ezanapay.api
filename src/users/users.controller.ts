@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  ClassSerializerInterceptor,
+  UseInterceptors,
   Request,
   UseGuards,
   ParseIntPipe,
@@ -35,6 +37,7 @@ export class UsersController {
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   public async me(@Request() req: any) {
