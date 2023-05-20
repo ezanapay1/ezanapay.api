@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
   UseGuards,
   ParseIntPipe,
 } from '@nestjs/common';
@@ -30,6 +31,14 @@ export class UsersController {
   @ApiCreatedResponse({ type: UserEntity })
   async create(@Body() createUserDto: CreateUserDto) {
     return new UserEntity(await this.usersService.create(createUserDto));
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @Get('me')
+  @ApiOkResponse({ type: UserEntity })
+  public async me(@Request() req: any) {
+    return new req.user();
   }
 
   @Get()
