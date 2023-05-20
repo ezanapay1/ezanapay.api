@@ -15,6 +15,12 @@ export class UserEntity implements User {
   name: string | null;
 
   @ApiProperty()
+  first_name: string | null;
+
+  @ApiProperty()
+  last_name: string | null;
+
+  @ApiProperty()
   email: string;
 
   @Exclude()
