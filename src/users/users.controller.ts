@@ -33,9 +33,9 @@ export class UsersController {
     return new UserEntity(await this.usersService.create(createUserDto));
   }
 
+  @Get('me')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Get('me')
   @ApiOkResponse({ type: UserEntity })
   public async me(@Request() req: any) {
     return new req.user();
