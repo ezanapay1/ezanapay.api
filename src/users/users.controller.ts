@@ -41,7 +41,8 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   public async me(@Request() req: any) {
-    return new req.user();
+    const user = await this.usersService.findOne(req.user.id);
+    return new UserEntity(user);
   }
 
   @Get()
