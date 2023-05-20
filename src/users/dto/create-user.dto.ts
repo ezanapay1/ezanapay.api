@@ -3,16 +3,16 @@ import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 import { Role } from '@prisma/client';
 
 export class CreateUserDto {
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  first_name: string;
+  // @IsString()
+  // @IsNotEmpty()
+  // @ApiProperty()
+  // // first_name: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  last_name: string;
-  
+  // @IsString()
+  // @IsNotEmpty()
+  // @ApiProperty()
+  // last_name: string;
+
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
