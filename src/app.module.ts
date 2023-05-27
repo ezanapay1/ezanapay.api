@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { EmailModule } from './email/email.module';
 import { EmailService } from './email/email.service';
 import { ConfigService } from '@nestjs/config';
+import { MpesaModule } from './mpesa/mpesa.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ConfigService } from '@nestjs/config';
     UnitsModule,
     AuthModule,
     EmailModule,
+    MpesaModule,
   ],
   controllers: [AppController],
   providers: [AppService, EmailService, ConfigService],
